@@ -32,34 +32,10 @@
                     </div>
                     <div class="book-bottom">
                         <div class="book-buttons">
-                            <button>edit</button>
-                            <button>read</button>
+                            <button type="button" id="edit"></button>
+                            <button type="button" id="read">Not Read</button>
                         </div>
                         <h4 class="pages">100</h4>
-                    </div>
-                    
-                </div>
-                <div class="book">
-                    <div class="book-info">
-                        <p>Book1</p>
-                        <p>Author1</p>
-                        <p>100</p>
-                    </div>
-                    <div class="book-buttons">
-                        <button>edit</button>
-                        <button>read</button>
-                    </div>
-                    
-                </div>
-                <div class="book">
-                    <div class="book-info">
-                        <p>Book1</p>
-                        <p>Author1</p>
-                        <p>100</p>
-                    </div>
-                    <div class="book-buttons">
-                        <button>edit</button>
-                        <button>read</button>
                     </div>
                     
                 </div>
@@ -72,9 +48,41 @@
                 <p>total books: </p>
                 <p>books read:</p>
                 <p>pages read: </p>
-                <button type="button" id="newBook">new book</button>
+                <button type="button" id="newBook" onclick="openForm()">new book</button>
             </div>
             <div class="signature"></div>
+        </div>
+    </div>
+
+    <div class="form-blur"></div>
+    <div class="form-container">
+        
+        <button type="button" id="cancel-form" onclick="closeForm()">X</button>
+        <div class="form">
+            <form action="" method="get">
+
+                <div class="form-line">
+                    <label for="input-title">Book Title</label>
+                    <input type="text" name="input-title" id="input-title" maxlength="40">
+                </div>
+                
+                <div class="form-line">
+                    <label for="input-author">Book Author</label>
+                    <input type="text" name="input-author" id="input-author" maxlength="30">
+                </div>
+
+                <div class="form-line">
+                    <label for="input-pages">Total Pages</label>
+                    <input type="number" name="input-pages" id="input-pages">
+                </div>
+
+                <div class="form-line">
+                    <input type="button" id="input-read" class="input-read" onclick="toggleReadMenu()" value="Not Read">
+                </div>
+
+                <input type="button" id="submit"  value="Add Book">
+
+            </form>
         </div>
     </div>
 </body>
