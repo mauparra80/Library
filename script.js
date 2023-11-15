@@ -52,6 +52,7 @@ function openForm()
     document.querySelector(".form-blur").style.display = "block";
 }
 
+//toggle read menu color
 function toggleReadMenu()
 {
     const readButton = document.querySelector('#input-read');
@@ -63,6 +64,31 @@ function toggleReadMenu()
     else {readButton.value = "Not Read"};
 }
 
+//color picker toggle effect.
+const violet = document.querySelector("#violet");
+const sienna = document.querySelector("#sienna");
+const blue = document.querySelector("#blue");
+const green = document.querySelector("#green");
+
+violet.addEventListener('click', colorPicked);
+sienna.addEventListener('click', colorPicked);
+blue.addEventListener('click', colorPicked);
+green.addEventListener('click', colorPicked);
+
+function colorPicked(e){
+    console.log(e.target);
+    //remove all focus
+    violet.classList.remove("selected");
+    sienna.classList.remove("selected");
+    blue.classList.remove("selected");
+    green.classList.remove("selected");
+    //add focus to target
+    e.target.classList.add("selected");
+    //set color
+    inputColor = e.target.dataset.color;
+}
+
+
 //called when submit button is clicked
 function saveUserInfo()
 {
@@ -71,6 +97,8 @@ function saveUserInfo()
     inputPages = document.getElementById("input-pages").value;
     inputRead = document.getElementById("input-read").value;
 
+    //save color info
+    //inputColor = 
    
 
     closeForm();
@@ -82,7 +110,7 @@ function saveUserInfo()
 //create object with current inputs and append new book object to library
 function addBookToLibrary()
 {
-    const book = new Book(inputTitle, inputAuthor, inputPages, "red", inputRead);
+    const book = new Book(inputTitle, inputAuthor, inputPages, inputColor, inputRead);
     myLibrary.push(book);
     console.log(book);
     console.log(myLibrary);
@@ -97,6 +125,7 @@ function closeForm()
 
 
 //toggle read button when clicked
+//updates read button for cards everytime a book is added
 function updateClick(){
 const readbtn = document.querySelectorAll(".book");
 readbtn.forEach((book, index) => {
@@ -109,14 +138,13 @@ readbtn.forEach((book, index) => {
 function changeReadBtn(index)
 {
     console.log(index); //this works
-    readBtn = document.querySelector("[data-index='"+index+"'] #read");
+    const readBtn = document.querySelector("[data-index='"+index+"'] #read");
 
     if (readBtn.textContent == "Not Read")
     {
         readBtn.style.backgroundColor = "rgb(108, 177, 108)";
         readBtn.textContent = "Read";
         myLibrary[index].read = "Read";
-        console.log(myLibrary[index]);
     }
     else if (readBtn.textContent == "Read")
     {
@@ -124,7 +152,6 @@ function changeReadBtn(index)
         readBtn.style.backgroundColor = "rgb(255, 140, 140)";
         readBtn.textContent = "Not Read";
         myLibrary[index].read = "Not Read";
-        console.log(myLibrary[index]);
     }
 }
 
@@ -138,6 +165,7 @@ function addCard() {
     newBook.classList.add('book');
     newBook.dataset.index = myLibrary.length;
     newBook.innerHTML = '<img src="./img/brown-book.png" alt="book">';
+    newBook.querySelector('img').classList.add(`filter-${inputColor}`);
 
     let bookInfo = document.createElement("div");
     let titleContent = document.createElement('h4');
@@ -159,7 +187,16 @@ function addCard() {
     let bookButtons = document.createElement("div");
     bookButtons.classList.add('book-buttons');
     bookButtons.innerHTML = '<button type="button" id="edit" data-index="' + myLibrary.length + '" ></button>';
-    bookButtons.innerHTML += '<button type="button" id="read">Read</button>';
+    bookButtons.innerHTML += '<button type="button" id="read"></button>';
+    const readBtn = bookButtons.querySelector("#read");
+    readBtn.textContent = inputRead;
+    //set initial color of button. I guess I could save space by figuring out a function
+    if (inputRead == "Read"){
+        readBtn.style.backgroundColor = "rgb(108, 177, 108)";
+    }
+    else if (inputRead == "Not Read"){
+        readBtn.style.backgroundColor = "rgb(255, 140, 140)";
+    }
     
     let pages = document.createElement('h4');
     pages.classList.add('pages');

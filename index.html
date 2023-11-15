@@ -23,7 +23,8 @@
         </div>
         <div class="main">
             <div class="books">
-                <div class="book">
+
+                <!-- <div class="book">
                     <img src="./img/brown-book.png" alt="book" >
                     <div class="book-info">
                         <h4 class="title">The Lord of The Rings</h4>
@@ -38,7 +39,8 @@
                         <h4 class="pages">100</h4>
                     </div>
                     
-                </div>
+                </div> -->
+
             </div>
         </div>
         <div class="right-bar">
@@ -77,7 +79,19 @@
                 </div>
 
                 <div class="form-line">
+                    <label for="color">color</label>
+                <div class="color-read">
+                    
+                    <div class="color-picker">
+                        
+                        <input type="button" id="violet" data-color="violet" value="">
+                        <input type="button" id="sienna" data-color="sienna" value="">
+                        <input type="button" id="blue" data-color="blue" value="">
+                        <input type="button" id="green" data-color="green" value="">
+                    </div>
+                    
                     <input type="button" id="input-read" class="input-read" onclick="toggleReadMenu()" value="Not Read">
+                </div>
                 </div>
 
                 <input type="button" id="submit"  value="Add Book">
