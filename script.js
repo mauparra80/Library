@@ -130,6 +130,7 @@ function updateClick(){
 const readbtn = document.querySelectorAll(".book");
 readbtn.forEach((book, index) => {
     book.querySelector("#read").addEventListener('click', () => {
+        event.stopImmediatePropagation();
         changeReadBtn(index);
     })
 })
