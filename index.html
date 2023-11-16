@@ -17,7 +17,7 @@
     <div class="container">
         <div class="top-bar">
             <div class="title">
-                <h2>Virtual Library</h2>
+                <h1>Virtual Library</h1>
             </div>
             <div class="user-info"></div>
         </div>
@@ -27,7 +27,8 @@
                 <!-- <div class="book">
                     <img src="./img/brown-book.png" alt="book" >
                     <div class="book-info">
-                        <h4 class="title">The Lord of The Rings</h4>
+                        <button type="button" id="delete-book">X</button>
+                        <h4 class="title">The Lord of The ings and the Goblet of FireR but that is not the title</h4>
                         <h4 class="author">Jr Tolken</h4>
                         
                     </div>
@@ -38,18 +39,22 @@
                         </div>
                         <h4 class="pages">100</h4>
                     </div>
+                    <div class="bottomBorder"></div>
                     
                 </div> -->
 
             </div>
         </div>
         <div class="right-bar">
-            <div class="sort-menu"></div>
-            <div class="stats">
-                <h4>Statss</h4>
-                <p>total books: </p>
-                <p>books read:</p>
-                <p>pages read: </p>
+            <div class="top">
+                <div class="sort-menu"></div>
+                <div class="book-stats">
+                    <h4>Book Stats</h4>
+                    <div class="stats">
+                        <p class="total-books"></p>
+                        <p class="books-read"></p>
+                    </div>
+                </div>
                 <button type="button" id="newBook" onclick="openForm()">new book</button>
             </div>
             <div class="signature"></div>

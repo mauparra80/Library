@@ -124,18 +124,59 @@ function closeForm()
 }
 
 
-//toggle read button when clicked
-//updates read button for cards everytime a book is added
+//updates all buttons on books when a new book is added
 function updateClick(){
 const readbtn = document.querySelectorAll(".book");
+console.log(readbtn);
+
+
 readbtn.forEach((book, index) => {
     book.querySelector("#read").addEventListener('click', () => {
         event.stopImmediatePropagation();
-        changeReadBtn(index);
+        changeReadBtn(book.dataset.index);
+    })
+})
+
+const deletebtn = document.querySelectorAll(".book");
+deletebtn.forEach((book, index) => {
+    book.querySelector("#delete-book").addEventListener('click', () => {
+        event.stopImmediatePropagation();
+        deleteBook(book.dataset.index);
     })
 })
 }
 
+//delete button is pressed
+function deleteBook(index)
+{
+    //delete book, update object and array, update buttons
+    console.log(`deleting book with ${index} index`);
+    console.log(myLibrary);
+
+    document.querySelector("[data-index='"+index+"']").remove();
+
+    console.log(myLibrary);
+    myLibrary.splice(index, 1);
+    console.log(myLibrary);
+    //getting wrong index when deleting and adding books. update index
+
+    updateIndex();
+    updateClick();
+}
+
+function updateIndex()
+{
+    let i = 0;
+    const books = document.
+    querySelectorAll(".book");
+    books.forEach((index) => {
+        index.dataset.index = i;
+        i++;
+        console.log(index.dataset.index)
+    });
+}
+
+//toggle read button is pressed
 function changeReadBtn(index)
 {
     console.log(index); //this works
@@ -154,6 +195,7 @@ function changeReadBtn(index)
         readBtn.textContent = "Not Read";
         myLibrary[index].read = "Not Read";
     }
+    updateStats();
 }
 
 //creates dom card with user input and adds to tree
@@ -169,6 +211,7 @@ function addCard() {
     newBook.querySelector('img').classList.add(`filter-${inputColor}`);
 
     let bookInfo = document.createElement("div");
+    bookInfo.innerHTML = '<button type="button" id="delete-book">X</button>';
     let titleContent = document.createElement('h4');
     let authorContent = document.createElement('h4');
     bookInfo.classList.add('book-info');
@@ -187,7 +230,7 @@ function addCard() {
     
     let bookButtons = document.createElement("div");
     bookButtons.classList.add('book-buttons');
-    bookButtons.innerHTML = '<button type="button" id="edit" data-index="' + myLibrary.length + '" ></button>';
+    bookButtons.innerHTML = '<button type="button" id="edit"';
     bookButtons.innerHTML += '<button type="button" id="read"></button>';
     const readBtn = bookButtons.querySelector("#read");
     readBtn.textContent = inputRead;
@@ -210,6 +253,11 @@ function addCard() {
     bookBottom.appendChild(pages);
     newBook.appendChild(bookBottom);
 
+    //add bottomBorder for shelf style (work in progress)
+    let botDiv = document.createElement('div');
+    botDiv.classList.add("bottomBorder");
+    newBook.appendChild(botDiv);
+
     
     
     //append all to books
@@ -220,6 +268,21 @@ function addCard() {
     readbtn.textContent = inputRead;
     
 
+}
+
+//update stats
+document.addEventListener('click', updateStats);
+
+function updateStats(){
+    let booksRead = 0;
+    myLibrary.forEach((book) => {
+        if (book.read == "Read"){booksRead++}
+    });
+
+
+    document.querySelector(".total-books").textContent = (myLibrary.length);
+    document.querySelector(".books-read").textContent = booksRead;
+    
 }
 
 
