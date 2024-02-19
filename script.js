@@ -1,25 +1,3 @@
-// function Book(title, author, pages, read) {
-//     this.title = title
-//     this.author = author;
-//     this.pages = pages;
-//     this.read = read;
-//     this.info = function() {
-//         return(title + " by " + author + ", " + pages + " pages, " + read + " read")
-//     }
-// }
-
-// Book.prototype.printAuthor = function(){
-//     console.log(this.author);
-// }
-
-// const NorseMyth = new Book("Norse Mythology", "Neil Geiman", 230, "already");
-// console.log(NorseMyth.info());
-// Book.printAuthor();
-
-
-// we need to open up box so the user can enter
-// title, author, pages
-//choose color, toggle read/not read
 
 const addBookBtn = document.querySelector("#submit");
 addBookBtn.addEventListener('click', saveUserInfo);
@@ -32,18 +10,16 @@ let inputRead = "not read";
 
 const myLibrary = [];
 
-function Book(title,author,pages,color,read) {
-    //the constructor
+//have to replace this object
+class Book {
+
+    constructor(title,author,pages,color,read){
     this.title = title; //str
     this.author = author; //str
     this.pages = pages;//int
     this.color = color; //str
     this.read = read; //str or bool
-}
-
-function updateLibrary()
-{
-    
+    }
 }
 
 function openForm()
@@ -76,7 +52,6 @@ blue.addEventListener('click', colorPicked);
 green.addEventListener('click', colorPicked);
 
 function colorPicked(e){
-    console.log(e.target);
     //remove all focus
     violet.classList.remove("selected");
     sienna.classList.remove("selected");
@@ -97,14 +72,12 @@ function saveUserInfo()
     inputPages = document.getElementById("input-pages").value;
     inputRead = document.getElementById("input-read").value;
 
-    //save color info
-    //inputColor = 
-   
-
-    closeForm();
-    addCard();
-    addBookToLibrary();
-    updateClick();
+    if (inputCheck(inputTitle)) {
+      closeForm();
+      addCard();
+      addBookToLibrary();
+      updateClick();
+    }
 }
 
 //create object with current inputs and append new book object to library
@@ -112,8 +85,6 @@ function addBookToLibrary()
 {
     const book = new Book(inputTitle, inputAuthor, inputPages, inputColor, inputRead);
     myLibrary.push(book);
-    console.log(book);
-    console.log(myLibrary);
 }
 
 function closeForm()
@@ -127,7 +98,6 @@ function closeForm()
 //updates all buttons on books when a new book is added
 function updateClick(){
 const readbtn = document.querySelectorAll(".book");
-console.log(readbtn);
 
 
 readbtn.forEach((book, index) => {
@@ -150,15 +120,9 @@ deletebtn.forEach((book, index) => {
 function deleteBook(index)
 {
     //delete book, update object and array, update buttons
-    console.log(`deleting book with ${index} index`);
-    console.log(myLibrary);
-
     document.querySelector("[data-index='"+index+"']").remove();
 
-    console.log(myLibrary);
     myLibrary.splice(index, 1);
-    console.log(myLibrary);
-    //getting wrong index when deleting and adding books. update index
 
     updateIndex();
     updateClick();
@@ -172,14 +136,12 @@ function updateIndex()
     books.forEach((index) => {
         index.dataset.index = i;
         i++;
-        console.log(index.dataset.index)
     });
 }
 
 //toggle read button is pressed
 function changeReadBtn(index)
 {
-    console.log(index); //this works
     const readBtn = document.querySelector("[data-index='"+index+"'] #read");
 
     if (readBtn.textContent == "Not Read")
@@ -201,8 +163,6 @@ function changeReadBtn(index)
 //creates dom card with user input and adds to tree
 function addCard() {
     //get user input
-    
-
     //create html content with user input
     let newBook = document.createElement("div");
     newBook.classList.add('book');
@@ -246,9 +206,6 @@ function addCard() {
     pages.classList.add('pages');
     pages.textContent = inputPages;
 
-    // console.log(document.querySelector(".books .book:last-child button:last-child").textContent);
-
-
     bookBottom.appendChild(bookButtons);
     bookBottom.appendChild(pages);
     newBook.appendChild(bookBottom);
@@ -285,60 +242,17 @@ function updateStats(){
     
 }
 
+function inputCheck(inputTitle) {
+  if (inputTitle === ''){ 
+    document.querySelector('#input-title').classList.add('invalid');
+    return false};
+  return true;
+}
 
+const inputTitleValue = document.querySelector('#input-title');
+inputTitleValue.addEventListener('input', () => {
+  console.log("input changed");
+  if (inputTitleValue.value === '') { inputTitleValue.classList.add('invalid');}
+  else {inputTitleValue.classList.remove('invalid');}
+})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function Person(name) {
-//     this.name = name;
-// }
-
-// Person.prototype.sayName = function() {
-//     console.log(`Hello, I'm ${this.name}!`);
-// };
-
-// function Player(name, marker) {
-//     this.name = name;
-//     this.marker = marker;
-// }
-
-// Player.prototype.getMarker = function() {
-//     console.log(`My marker is '${this.marker}'`);
-// };
-
-// console.log(Object.getPrototypeOf(Player.prototype));
-
-// Object.setPrototypeOf(Player.prototype, Person.prototype);
-// console.log(Object.getPrototypeOf(Player.prototype));
-
-// const player1 = new Player("steve", "X");
-// const player2 = new Player("also steve", "O");
-
-// player1.sayName();
-// player2.sayName();
-
-// player1.getMarker();
-// player2.getMarker();

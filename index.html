@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +17,8 @@
 <body>
     <div class="container">
         <div class="top-bar">
-            <div class="title">
-                <h1>Virtual Library</h1>
+            <div class="title playfair-display">
+                <h1 class="playfair-display">Virtual Library</h1>
             </div>
             <div class="user-info"></div>
         </div>
@@ -45,11 +46,13 @@
 
             </div>
         </div>
+        
         <div class="right-bar">
             <div class="top">
                 <div class="sort-menu"></div>
                 <div class="book-stats">
-                    <h4>Book Stats</h4>
+                    <span class="frame-wire"></span>
+                    <span class="frame-nail"></span>
                     <div class="stats">
                         <p class="total-books"></p>
                         <p class="books-read"></p>
@@ -57,7 +60,11 @@
                 </div>
                 <button type="button" id="newBook" onclick="openForm()">new book</button>
             </div>
-            <div class="signature"></div>
+            <a class="signature" href="https://github.com/mauparra80/Library" target="_blank">
+              <img src="./img/github-mark-white.png" alt="github logo">
+              <p>Mauparra80</p>
+            </a>
+            
         </div>
     </div>
 
@@ -68,9 +75,9 @@
         <div class="form">
             <form action="" method="get">
 
-                <div class="form-line">
+                <div class="form-line input-title-container">
                     <label for="input-title">Book Title</label>
-                    <input type="text" name="input-title" id="input-title" maxlength="40">
+                    <input type="text" name="input-title" id="input-title" maxlength="40" required>
                 </div>
                 
                 <div class="form-line">
@@ -99,7 +106,7 @@
                 </div>
                 </div>
 
-                <input type="button" id="submit"  value="Add Book">
+                <input type="submit" id="submit"  value="Add Book">
 
             </form>
         </div>
